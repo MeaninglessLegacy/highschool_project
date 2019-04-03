@@ -183,7 +183,7 @@ def flatRender(renderList, cam, borders, s, stage, background_screen, ch):
     #Sort the Distances from far to close
     sD = functions.copyArray(d)
     sD.sort()
-    sD.reverse()
+    #sD.reverse()
 
     fRenderList = []
 

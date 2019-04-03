@@ -50,7 +50,7 @@ screens = {
                 x_position=0,
                 y_position=0,
 
-                image="Backgrounds/background.png",
+                image="Backgrounds/background_2.png",
                 image_alpha=255,
 
             ),

@@ -11,24 +11,28 @@ tileMapper = Game_Scripts.tileMap
 stages = {
     "bridge_1" : {
         "background": {
-            "img" : None,
-            "position" : None,
-            "scale" : (1,0.6),
+            "visible" : True,
+            "img" : 'Stage_Assets/backgrounds/sunset_2.png',
+            "position" : (3000,0),
+            "scale" : (3,1),
         },
         "middle_ground": {
+            "visible" : False,
             "img" : None,
             "position" : None,
             "scale" : None,
         },
         "stage_floor": {
-            "img" : "Stage_Assets/stage_floors/bridge_1.png",
-            "position" : (1400,100),
-            "scale" : (2,1),
+            "visible" : True,
+            "img" : 'Stage_Assets/stage_floors/bridge_2.png',
+            "position" : (70,21),
+            "scale" : (100,26),
         },
         "foreground": {
-            "img" : None,
-            "position" : None,
-            "scale" : None,
+            "visible" : True,
+            "img" : 'Stage_Assets/foregrounds/bridge_under_1.png',
+            "position" : (70,-2),
+            "scale" : (100,24),
         },
         "bgm" : {
             "name" : "Mob_Battle",

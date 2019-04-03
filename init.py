@@ -344,7 +344,7 @@ while run:
             ui_elements_list = screen_layouts.return_screen_elements('title_screen')
 
             stage_manager.set_bgm('Stage_Assets/bgm/Uncontrollable.mp3')
-            pygame.mixer.music.set_volume(0.75)
+            pygame.mixer.music.set_volume(0.2)
             pygame.mixer.music.play(-1)
 
         elif previous_screen == "title":
