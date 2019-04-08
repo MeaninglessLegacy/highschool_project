@@ -503,6 +503,9 @@ while run:
                 elif players[player]['control_type'] == 'controller':
                     controls.controllerPress2D(ch, borders, cam, players, player)
 
+            #music
+            stage_manager.music_stage(current_stage, 0)
+
         #update tiles
         tileMapper.updateTileSet(tile_set)
         # Update Sprite Locations on Grid Pos
@@ -536,7 +539,6 @@ while run:
 
         #Render Options
         renderer.flatRender(drawList, cam, borders, s, current_stage, background_screen, ch)
-        stage_manager.music_stage(current_stage, 0)
         #renderer.render3D(drawList, cam, s)
 
         # Draw UIs below renderer because renderer clears our screen

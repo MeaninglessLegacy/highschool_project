@@ -8,16 +8,36 @@ import math, Game_Scripts.functions
 
 functions = Game_Scripts.functions
 
+cam_to_pos = None
+
 ############################################################################
 ############################################################################
 
+def tween_camera(cam, new_position):
+
+    x_dist = new_position[0] - cam.x
+    y_dist = new_position[1] - cam.y
+    z_dist = new_position[2] - cam.z
+
+    dist = math.sqrt((x_dist*x_dist+y_dist*y_dist)+z_dist*z_dist)
+
+    if dist > 2:
+        if math.fabs(x_dist) > 0.5:
+            cam.x += x_dist/10
+        if math.fabs(y_dist) > 0.5:
+            cam.y += y_dist/10
+        if math.fabs(z_dist) > 0.5:
+            cam.z += z_dist/10
+
 def determine_camera_position(characters, cam):
+
+    global cam_to_pos, cam_old_pos
 
     distances = []
     points = []
     farthest_pair = None
 
-    min_z = 15
+    min_z = 12.5
 
     for chr in characters:
 
@@ -60,9 +80,13 @@ def determine_camera_position(characters, cam):
 
     midpoint = ((point_1[0]+point_2[0])/2,(point_1[1]+point_2[1])/2)
 
-    cam.x = midpoint[0]
-    cam.y = midpoint[1]+6
+    x = midpoint[0]
+    y = midpoint[1]+6
     new_z = 0.75*distances[0]
-    if new_z < 12.5:
-        new_z = 12.5
-    cam.z = new_z
+    if new_z < min_z:
+        new_z = min_z
+
+    if cam_to_pos != (x, y, new_z):
+        cam_to_pos = (x, y, new_z)
+
+    tween_camera(cam, cam_to_pos)
