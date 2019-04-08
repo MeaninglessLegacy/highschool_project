@@ -68,11 +68,14 @@ class stats():
         self.rate = rate
 
         self.atk = atk
+        self.shield_strength = 0
+        self.shielding = False
 
         self.maxHP = maxHP
         self.currentHP = maxHP
 
         self.walkspeed = walkspeed
+        self.base_weight = weight
         self.weight = weight
         self.momentum = (0,0)
         self.current_Tile = (0,0)

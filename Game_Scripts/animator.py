@@ -132,7 +132,7 @@ def animationPlayer(sprite, animation, ch):
                     #remove movement commands
                     if name == "meleeAtk":
                         chr.stats.queued_actions = [elem for elem in chr.stats.queued_actions if elem.type != 'walk']
-                    #remove animation
+                    # remove animation
                     sprite.animationList.remove(animation)
             else:
                 # reduce delay

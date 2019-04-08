@@ -52,13 +52,13 @@ def drawHealthBar(UI_surface, w, h, ch):
     hp_text_rect = hp_text.get_rect(center=(math.ceil(w * 0.075), math.ceil(h * 0.55)))
     UI_surface.blit(hp_text, hp_text_rect)
     #hp label text
-    text_Surface = f.render((str(int(currentHP))+"/"+str(maxHP)), True, [255, 255, 255])
+    text_Surface = f.render((str(int(math.ceil(currentHP)))+"/"+str(maxHP)), True, [255, 255, 255])
     text_rect = text_Surface.get_rect(center=(math.ceil(w*0.8), math.ceil(h*0.55)))
     UI_surface.blit(text_Surface, text_rect)
 
 
 #the ui along the bottom
-def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch):
+def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch, players):
     #character boxes along the bottom
     #top half is character image/portrait sprite
 
@@ -117,6 +117,12 @@ def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch):
             ui_selected = ui_assets.returnAsset("universal")["portrait_select"]
             asset = functions.get_image(ui_selected["image"])
             asset = pygame.transform.scale(asset, (math.floor(char_guiX * w), math.floor(char_guiY * h)))
+            ply = controls.find_player(players, player_characters[chr])
+            if ply != None:
+                # reset RGB
+                asset.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+                # add in new RGB values
+                asset.fill(ply['color'][0:3] + (0,), None, pygame.BLEND_RGBA_ADD)
             gui_main.blit(asset, (0, 0))
 
         #define a region for the rest of the ui to be drawn on
@@ -144,9 +150,9 @@ def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch):
         name_text_rect = name_text.get_rect(center=(math.ceil(stat_displaysX * 0.2), math.ceil(stat_displaysY * 0.3)))
         stat_displays.blit(name_text, name_text_rect)
         # level label
-        level_text = f.render((str(ui_chr.stats.lvl)), True, [255, 255, 255])
+        '''level_text = f.render((str(ui_chr.stats.lvl)), True, [255, 255, 255])
         level_rect = level_text.get_rect(center=(math.ceil(stat_displaysX * 0.8), math.ceil(stat_displaysY * 0.3)))
-        stat_displays.blit(level_text, level_rect)
+        stat_displays.blit(level_text, level_rect)'''
 
 
 
@@ -169,7 +175,7 @@ def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch):
 blankSurface = None
 
 #Main function
-def draw_combat_UI(primaryScreen, UI_surface, w, h, ch):
+def draw_combat_UI(primaryScreen, UI_surface, w, h, ch, players):
 
     #Blank Surface/Redraw the UI
     if globals()['blankSurface'] is None:
@@ -177,7 +183,7 @@ def draw_combat_UI(primaryScreen, UI_surface, w, h, ch):
     elif UI_surface is not blankSurface:
         UI_surface = pygame.Surface((w, h), pygame.SRCALPHA)
     #draw Ui
-    drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch)
+    drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch, players)
 
     pass
 

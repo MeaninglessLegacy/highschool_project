@@ -12,9 +12,9 @@ stages = {
     "bridge_1" : {
         "background": {
             "visible" : True,
-            "img" : 'Stage_Assets/backgrounds/sunset_2.png',
-            "position" : (3000,0),
-            "scale" : (3,1),
+            "img" : 'Stage_Assets/backgrounds/sunset_3.png',
+            "position" : (1200,0),
+            "scale" : (2,1),
         },
         "middle_ground": {
             "visible" : False,
@@ -30,17 +30,18 @@ stages = {
         },
         "foreground": {
             "visible" : True,
-            "img" : 'Stage_Assets/foregrounds/bridge_under_1.png',
-            "position" : (70,-2),
-            "scale" : (100,24),
+            "img" : 'Stage_Assets/foregrounds/bridge_under_2.png',
+            "position" : (70,2),
+            "scale" : (100,28),
         },
         "bgm" : {
-            "name" : "Mob_Battle",
-            "volume" : 0.2,
-            "source" : 'Stage_Assets/bgm/NO_EX01.mp3',
+            "name" : "Final Encounter",
+            "volume" : 0.5,
+            "fade_in_time" : 50,
+            "source" : 'Stage_Assets/bgm/The Last Encounter Collection/TLE Digital Loop Medium.wav',
         },
         "map" : {
-            'tile_set' : tileMapper.tileSet2D(20,9,0,0,-15,2),
+            'tile_set' : tileMapper.tileSet2D(20,10,0,-2,-15,2),
         },
         "spawns" : [
             (36,8),
@@ -71,6 +72,7 @@ stages = {
         "bgm" : {
             "name" : "NO.EX01",
             "volume" : 0.2,
+            "fade_in_time" : 50,
             "source" : 'Stage_Assets/bgm/NO_EX01.mp3',
         },
         "map" : {

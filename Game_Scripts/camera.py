@@ -61,8 +61,8 @@ def determine_camera_position(characters, cam):
     midpoint = ((point_1[0]+point_2[0])/2,(point_1[1]+point_2[1])/2)
 
     cam.x = midpoint[0]
-    cam.y = midpoint[1]+4
+    cam.y = midpoint[1]+6
     new_z = 0.75*distances[0]
-    if new_z < 7.5:
-        new_z = 7.5
+    if new_z < 10:
+        new_z = 10
     cam.z = new_z

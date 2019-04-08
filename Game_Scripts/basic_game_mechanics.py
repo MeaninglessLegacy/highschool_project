@@ -3,7 +3,7 @@
 
 #Basic Game Mechanics
 
-import Game_Scripts.animator, math, Game_Scripts.functions
+import Game_Scripts.animator, math, Game_Scripts.functions, random
 
 functions = Game_Scripts.functions
 animator = Game_Scripts.animator
@@ -13,7 +13,14 @@ animator = Game_Scripts.animator
 ############################################################################
 ############################################################################
 
+block_sounds = [
+    'Sound_Assets/block_1.wav',
+    'Sound_Assets/block_2.wav',
+    'Sound_Assets/block_3.wav',
+]
 
+############################################################################
+############################################################################
 
 #Movement
 def moveChr(ch):
@@ -83,20 +90,37 @@ def damageTarget(initiator, target, attack):
     initStats = initiator.stats
     tarStats = target.stats
 
+    #target stats
+    tar_shield = tarStats.shield_strength
+
+    damage = damage-(damage*tar_shield)
+
+    hit_sound = None
+
+    if tarStats.shielding == True:
+        hit_sound = functions.get_sound(random.choice(block_sounds))
+    else:
+        hit_sound = functions.get_sound("Sound_Assets/light_hit_2.wav")
+
+
     knockback_modifier = 1
 
     #damage target
-    if tarStats.currentHP - damage <= 0:
+    if tarStats.currentHP - damage <= 0 and tarStats.knockedOut == False:
         knockback_modifier = (80*tarStats.weight/2)/knockback
         tarStats.currentHP = 0
-    else:
+    elif tarStats.knockedOut == False:
         tarStats.currentHP -= damage
 
+    knockbackStrength = 0
+
     #knockback formula 10 is the scaling ratio, so this formula returns pixel / frame knocked back
-    knockbackStrength = math.sqrt(2*(knockback*knockback_modifier)/tarStats.weight)
+    if 2*(knockback*knockback_modifier)/tarStats.weight > 0:
+        knockbackStrength = math.sqrt(2*(knockback*knockback_modifier)/tarStats.weight)
 
     #knockback
-    if tarSpr.x > initSpr.x:
+    #if tarSpr.x > initSpr.x:
+    if initSpr.heading == '-':
         tarSpr.heading = '+'
         tarStats.momentum = (knockbackStrength, 0)
     else:
@@ -116,14 +140,14 @@ def damageTarget(initiator, target, attack):
         pass
     else:
         #play sound
-        hit_sound = functions.get_sound("Sound_Assets/light_hit_2.wav")
         hit_sound.set_volume(0.8)
         hit_sound.play()
 
         tarStats.canMove = False
         if tarStats.knockedOut == False:
             tarStats.stunTimer = math.ceil(knockbackStrength*2)
-            animator.addAnimation(target, tarSpr.animationSet['combat_stagger'])
+            if tarStats.shield_strength == 0:
+                animator.addAnimation(target, tarSpr.animationSet['combat_stagger'])
 
 #Stuns
 def manageStun(ch):
@@ -133,7 +157,7 @@ def manageStun(ch):
     spr = chr.spriteObject
 
     #if is knocked out on the ground
-    if stats.knockedOut == True or stats.currentHP == 0:
+    if stats.knockedOut == True or stats.currentHP <= 0:
         animator.addAnimation(chr, spr.animationSet['combat_knocked_out'])
         animator.removeAnimation(chr, spr.animationSet['combat_recover'])
     else:
@@ -149,14 +173,18 @@ def manageStun(ch):
         if stats.knockedOut == True and stats.currentHP != 0:
             #if knocked out recover
             stats.knockedOut = False
-            stats.stunTimer = math.ceil(len(spr.animationSet['combat_recover']['frames'])*spr.animationSet['combat_recover']['delay'])
+            stats.stunTimer = math.ceil(((len(spr.animationSet['combat_recover']['frames'])*2)-1)*(spr.animationSet['combat_recover']['delay']*math.fabs(1/chr.stats.rate)))
             animator.addAnimation(chr, spr.animationSet['combat_recover'])
         #if not knocked out
         elif stats.knockedOut == False:
             #resume normal control
             stats.canMove = True
-            animator.removeAnimation(chr, spr.animationSet['combat_stagger'])
-            animator.removeAnimation(chr, spr.animationSet['combat_knocked_out'])
+            if spr.animationSet['combat_stagger'] in spr.animationList or spr.animationSet['combat_knocked_out'] in spr.animationList:
+                animator.removeAnimation(chr, spr.animationSet['combat_stagger'])
+                animator.removeAnimation(chr, spr.animationSet['combat_knocked_out'])
+                #clear character
+                spr.animationList = []
+                stats.previous_action = []
 
 
 ############################################################################

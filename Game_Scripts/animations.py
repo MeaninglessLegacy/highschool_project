@@ -1,7 +1,7 @@
 ############################################################################
 ############################################################################
 
-fps = 24
+fps = 30
 
 #dictionary of animations
 #dictionary key for animation = animation set
@@ -14,13 +14,13 @@ animations = {
             "animation_priority" : 1,
             "name" : 'combat_walk',
             "looped" : False,
-            "delay" : fps/18,
+            "delay" : fps/fps,
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/0.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/1.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/2.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/3.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/4.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/0-0.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/0-1.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/0-2.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/0-3.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Walk/0-4.png",
             ],
             "sounds" : {
             },
@@ -29,12 +29,12 @@ animations = {
             "animation_priority" : 4,
             "name" : 'meleeAtk',
             "looped" : False,
-            "delay" : fps/24,
+            "delay" : fps/fps,
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-1.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-2.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-3.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-4.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-0-1.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-0-2.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-0-3.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/0-0-4.png",
             ],
             "sounds" : {
                 "swing" : {
@@ -53,12 +53,12 @@ animations = {
             "animation_priority" : 4,
             "name" : 'meleeAtk',
             "looped" : False,
-            "delay" : fps/24,
+            "delay" : fps/fps,
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-1.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-2.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-3.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-4.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-1-1.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-1-2.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-1-3.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-1-4.png",
             ],
             "sounds" : {
                 "swing" : {
@@ -73,31 +73,42 @@ animations = {
                 },
             },
         },
+        "combat_shield" : {
+            "animation_priority" : 6,
+            "name" : 'shield',
+            "looped" : True,
+            "delay" : fps/fps,
+            "frames" : [
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Shield/1.png",
+            ],
+            "sounds" : {
+            },
+        },
         "combat_stagger" : {
             "animation_priority": 5,
             "name" : 'stagger',
             "looped" : False,
-            "delay" : fps/16,
+            "delay" : fps/(2/3*fps),
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Stagger/0.jpeg",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Stagger/0-0.png",
             ],
             "sounds":{
             },
         },
         "combat_knocked_down" : {
-            "animation_priority": 8,
+            "animation_priority": 9,
             "name" : 'knockedDown',
             "looped" : False,
-            "delay" : fps/12,
+            "delay" : fps/(2/3*fps),
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/1.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/2.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/4.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/3.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/5.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/6.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/7.jpeg",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-0.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-1.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-2.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-3.png",
+                #"Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-4.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-5.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-6.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-7.png",
             ],
             "sounds" : {
                 "hit" : {
@@ -113,28 +124,28 @@ animations = {
             },
         },
         "combat_knocked_out" : {
-            "animation_priority": 6,
+            "animation_priority": 7,
             "name" : 'knockedOut',
             "looped" : True,
-            "delay" : fps/12,
+            "delay" : fps/(fps/2),
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/7.jpeg",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Knock_Down/0-7.png",
             ],
             "sounds" : {
             },
         },
         "combat_recover" : {
-            "animation_priority": 7,
+            "animation_priority": 8,
             "name" : 'recover',
             "looped" : False,
-            "delay" : fps/12,
+            "delay" : fps/(fps*5/6),
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/0.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/1.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/2.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/3.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/4.jpeg",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/5.jpeg",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/0-0.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/0-1.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/0-2.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/0-3.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/0-4.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Recovery/0-5.png",
             ],
             "sounds" : {
             },
@@ -143,14 +154,14 @@ animations = {
             "animation_priority": 0,
             "name" : 'idle',
             "looped" : True,
-            "delay" : fps/16,
+            "delay" : fps/(2/3*fps),
             "frames" : [
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/0.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/1.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/2.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/3.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/4.png",
-                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/5.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/0-0.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/0-1.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/0-2.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/0-3.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/0-4.png",
+                "Sprite_Assets/Sprites/Tank_Sprites/Combat_Idle/0-5.png",
             ],
             "sounds" : {
             },

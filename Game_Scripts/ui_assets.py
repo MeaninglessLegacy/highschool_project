@@ -15,7 +15,7 @@ assets = {
     },
     "universal" : {
         "portrait_select" : {
-            "image" : "UI_Assets/portraits/selected.png",
+            "image" : "UI_Assets/portraits/selected_generic.png",
         },
     }
 }

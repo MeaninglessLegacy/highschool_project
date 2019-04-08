@@ -195,19 +195,27 @@ def flatRender(renderList, cam, borders, s, stage, background_screen, ch):
 
     #drawbackground first
     background_render_ticks = 24
-    background = stage_manager.renderStage2D(stage, background_screen, cam)
+    background = stage_manager.renderStage2D(stage, background_screen, cam,2)
     s.blit(background, (0,0))
 
     drawBorders2_5D(borders, cam, s)
 
+    tile_layer= pygame.Surface((s.get_width(), s.get_height()), pygame.SRCALPHA)
+
     #tiles before chr
     for i in range(0, len(fRenderList)):
         if isinstance(fRenderList[i], tile):
-            drawTile2_5D(fRenderList[i], cam, s)
+            drawTile2_5D(fRenderList[i], cam, tile_layer)
+    s.blit(tile_layer, (0,0))
     for i in range(0, len(fRenderList)):
         if isinstance(fRenderList[i], sprite):
             #drawSprite2D(fRenderList[i], cam, s)
             drawSprite3D(fRenderList[i], cam, s)
+
+    foreground_screen = pygame.Surface((background_screen.get_width(), background_screen.get_height()), pygame.SRCALPHA)
+    #foreground
+    foreground = stage_manager.renderStage2D(stage, foreground_screen, cam, 1)
+    s.blit(foreground, (0,0))
 
 
 
@@ -373,8 +381,9 @@ def drawTile2_5D(o, cam, s):
             pygame.draw.line(s, o.fillColor, [edges[i][0][0], edges[i][0][1]], [edges[i][1][0], edges[i][1][1]], 1)
 
     if o.occupied == True:
-        for i in range(0, len(edges)):
-            pygame.draw.line(s, (255,255,255), [edges[i][0][0], edges[i][0][1]], [edges[i][1][0], edges[i][1][1]], 1)
+        pygame.draw.polygon(s, o.fillColor[0:3] + (50,), [dC[1], dC[3], dC[2], dC[0]], 0)
+        #for i in range(0, len(edges)):
+            #pygame.draw.line(s, (255,255,255, 150), [edges[i][0][0], edges[i][0][1]], [edges[i][1][0], edges[i][1][1]], 1)
 
     # Fill the face of tiles that have an atk on them
     hasAtk = False
@@ -383,9 +392,9 @@ def drawTile2_5D(o, cam, s):
             if isinstance(i, tile_mapper.attack) == True:
                 hasAtk = True
     if hasAtk == True:
-        pygame.draw.polygon(s, (255, 85, 85), [dC[1], dC[3], dC[2], dC[0]], 0)
-        for i in range(0, len(edges)):
-            pygame.draw.line(s, (255, 85, 85), [edges[i][0][0], edges[i][0][1]], [edges[i][1][0], edges[i][1][1]],5)
+        pygame.draw.polygon(s, (255, 85, 85, 200), [dC[1], dC[3], dC[2], dC[0]], 0)
+        #for i in range(0, len(edges)):
+            #pygame.draw.line(s, (255, 85, 85), [edges[i][0][0], edges[i][0][1]], [edges[i][1][0], edges[i][1][1]],5)
 
 
 #Draw Borders of Map
@@ -427,4 +436,4 @@ def drawBorders2_5D(border, cam, s):
         edges.append([dC[segments[i][0]], dC[segments[i][1]]])
 
     for i in range(0, len(edges)):
-            pygame.draw.line(s, (65,255,255), [edges[i][0][0], edges[i][0][1]], [edges[i][1][0], edges[i][1][1]], 1)
+            pygame.draw.line(s, (255,255,255, 150), [edges[i][0][0], edges[i][0][1]], [edges[i][1][0], edges[i][1][1]], 1)

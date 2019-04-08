@@ -83,7 +83,7 @@ def action_player(action, chr, ch):
                 #clear all movementcommands if last command was an attack
 
             #Walk Action
-            if action.type == 'walk':
+            if action.type == 'walk' and chr.stats.canMove == True and chr.stats.shielding == False:
                 #chr spr
                 spr = chr.spriteObject
                 #set walkspeed
@@ -107,21 +107,19 @@ def action_player(action, chr, ch):
                 elif action.direction == 'south':
                     chr.stats.momentum  = (chr.stats.momentum[0], chr.stats.momentum[1]-walkspeed)
                     spr.direction = "south"
+                #animate
+                animator.addAnimation(chr, action.animation)
             #melee attack action test
-            if action.type == 'meleeAtk':
+            if action.type == 'meleeAtk' and chr.stats.canMove == True:
 
                 #stats
                 spr = chr.spriteObject
-                self_tile = chr.stats.current_Tile
                 hitframe = action.hitframe
                 forward_momentum = action.momentum
 
-                #borders
-                borders = functions.get_Borders()
-                topCorner = borders[0]
-                bottomCorner = borders[1]
-
                 #moveforward
+                if action.current_frame <= 2:
+                    animator.addAnimation(chr, action.animation)
                 if action.current_frame == hitframe:
                     if spr.heading == '-':
                         hitTiles = attackMapper.returnTilesHit(chr, action.attackMap)
@@ -148,15 +146,8 @@ def action_player(action, chr, ch):
                             tile_map.createTileEffect(atk, hitTile)
                         chr.stats.momentum = (chr.stats.momentum[0] - forward_momentum, chr.stats.momentum[1])
 
-            #animate
-            animator.addAnimation(chr, action.animation)
             #previous action
             chr.stats.previous_action.append(action)
-
-
-
-
-
 
 
 

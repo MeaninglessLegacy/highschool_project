@@ -115,6 +115,45 @@ fps = animations.fps
 #characters
 ch = {}
 
+#players
+
+players = {
+    "player_1" : {
+        'player' : 'player_1',
+        'color' : (255,255,0),
+        'sC' : None,
+        'control_type' : 'keyboard',
+        'ability_cd' : {
+            '1' : 0,
+            '2' : 0,
+            '3' : 0,
+            'chr_swap' : 0,
+        },
+        'abilities_held' : {
+            '1' : False,
+            '2' : False,
+            '3' : False,
+        }
+    },
+    "player_2" : {
+        'player' : 'player_2',
+        'color' : (70,255,255),
+        'sC' : None,
+        'control_type' : 'keyboard',
+        'ability_cd' : {
+            '1' : 0,
+            '2' : 0,
+            '3' : 0,
+            'chr_swap' : 0,
+        },
+        'abilities_held' : {
+            '1' : False,
+            '2' : False,
+            '3' : False,
+        }
+    },
+}
+
 #render type 3d cam can also be used for 2.5D
 #cam = renderer.camera2D(550, 100, 0)
 cam=renderer.camera3D(15, 8, 15, 0, 0)
@@ -170,14 +209,14 @@ ch["tank"] = sprites.character(
         name = "dummy 2",
         chrClass = "tank",
         team = '1',
-        maxHP = 300,
+        maxHP = 150,
         lvl= 10,
         weight=200,
         rate = 1,
-        walkspeed = 0.6,
-        atk = 8,
+        walkspeed = 1,
+        atk = 12,
     ),
-    isSelected=True,
+    isSelected=False,
     playerCharacter = True,
 )
 
@@ -199,11 +238,11 @@ ch["dummy"] = sprites.character(
         chrClass = "tank",
         team = '2',
         maxHP = 150,
-        lvl=5,
-        weight=100,
-        rate = 2,
-        walkspeed = 0.7,
-        atk = 60,
+        lvl=10,
+        weight=200,
+        rate = 1,
+        walkspeed = 1,
+        atk = 12,
     ),
     isSelected=False,
     playerCharacter = True,
@@ -343,8 +382,8 @@ while run:
             #add all the buttons and stuff
             ui_elements_list = screen_layouts.return_screen_elements('title_screen')
 
-            stage_manager.set_bgm('Stage_Assets/bgm/Uncontrollable.mp3')
-            pygame.mixer.music.set_volume(0.2)
+            stage_manager.set_bgm('Stage_Assets/bgm/The Last Encounter Collection/TLE INTERLUDE A-STANDALONE LOOP.wav')
+            pygame.mixer.music.set_volume(0.6)
             pygame.mixer.music.play(-1)
 
         elif previous_screen == "title":
@@ -445,6 +484,7 @@ while run:
                     for chr in teams[team]:
                         ch[chr].spriteObject.x = slots_assigned[team][0]
                         ch[chr].spriteObject.y = slots_assigned[team][1]
+            #transition into combat
 
 
 
@@ -457,12 +497,16 @@ while run:
 
             #key press events
             #controls.keyPress3D(ch, cam)
-            controls.keyPress2D(ch, borders, cam)
+            for player in players:
+                if players[player]['control_type'] == 'keyboard':
+                    controls.keyPress2D(ch, borders, cam, players, player)
+                elif players[player]['control_type'] == 'controller':
+                    controls.controllerPress2D(ch, borders, cam, players, player)
 
         #update tiles
         tileMapper.updateTileSet(tile_set)
         # Update Sprite Locations on Grid Pos
-        tileMapper.updateSpriteTiles(tile_set, ch)
+        tileMapper.updateSpriteTiles(tile_set, ch, players)
         # Update Tile Effects
         tileMapper.updateTileEffects(tile_set, ch)
 
@@ -495,10 +539,11 @@ while run:
         #renderer.render3D(drawList, cam, s)
 
         # Draw UIs below renderer because renderer clears our screen
-        combat_UI_manager.draw_combat_UI(s, combat_UI, w, h, ch)
+        combat_UI_manager.draw_combat_UI(s, combat_UI, w, h, ch, players)
 
         #win conditions
         if win_conditions(['eliminate']) == True:
+            stage_manager.fade_out_bgm(current_stage)
             pass
             #game_fps=1
             #battle end animations before leaving

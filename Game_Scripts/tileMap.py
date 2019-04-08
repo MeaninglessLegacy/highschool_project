@@ -137,10 +137,11 @@ def borders2D(tileset):
 
     return bordercorners
 
-def updateSpriteTiles(tileset, ch):
+def updateSpriteTiles(tileset, ch, players):
 
     #Reset All Tiles
     for i in range(0, len(tileset)):
+        tileset[i].fillColor = (223, 248, 255)
         tileset[i].occupied = False
 
     for key in ch:
@@ -165,6 +166,10 @@ def updateSpriteTiles(tileset, ch):
             if (sD[0] == d[i]):
                 fKey.append(tileset[i])
                 tileset[i].occupied = True
+                #set tile color
+                for ply in players:
+                    if players[ply]['sC'] == ch[key]:
+                        tileset[i].fillColor = players[ply]['color']
                 break
 
         ch[key].stats.current_Tile = tileset[i].gridPos
