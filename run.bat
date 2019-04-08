@@ -1,1 +1,1 @@
-"Python\python.exe" "init.py"
+"..\Python\python.exe" "init.py"

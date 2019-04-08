@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a84f92f-450e-4e94-af93-37e52575a042" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/actions_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/actions_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/animations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/animator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/animator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/basic_game_mechanics.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/basic_game_mechanics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game_Scripts/camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/camera.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/character_skills.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/character_skills.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/combat_UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/combat_UI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/controls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/controls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/renderer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/skills/tank_skills.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/skills/tank_skills.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/sprites.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game_Scripts/stage_Manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/stage_Manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/stages.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/stages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/tileMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/tileMap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game_Scripts/ui_assets.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game_Scripts/ui_assets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sound_Assets/FXhome.com Sword Sound 87_87.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sprite_Assets/Sprites/Tank_Sprites/Combat_Basic/1-3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI_Assets/portraits/template.psd" beforeDir="false" afterPath="$PROJECT_DIR$/UI_Assets/portraits/template.psd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.py" beforeDir="false" afterPath="$PROJECT_DIR$/init.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +18,8 @@
       <file leaf-file-name="init.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/init.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="37" selection-start-line="37" selection-end-line="37" selection-end-column="55" />
+            <state relative-caret-position="194">
+              <caret line="538" column="8" selection-start-line="538" selection-start-column="8" selection-end-line="538" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -45,7 +27,7 @@
       <file leaf-file-name="renderer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game_Scripts/renderer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
+            <state relative-caret-position="3655">
               <caret line="216" column="69" selection-start-line="216" selection-start-column="69" selection-end-line="216" selection-end-column="69" />
             </state>
           </provider>
@@ -54,7 +36,7 @@
       <file leaf-file-name="basic_game_mechanics.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game_Scripts/basic_game_mechanics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="1819">
               <caret line="107" column="18" selection-start-line="107" selection-start-column="18" selection-end-line="107" selection-end-column="18" />
             </state>
           </provider>
@@ -63,7 +45,7 @@
       <file leaf-file-name="combat_UI.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game_Scripts/combat_UI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="2040">
               <caret line="124" column="51" selection-start-line="124" selection-start-column="51" selection-end-line="124" selection-end-column="51" />
             </state>
           </provider>
@@ -81,7 +63,7 @@
       <file leaf-file-name="tank_skills.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game_Scripts/skills/tank_skills.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="884">
               <caret line="52" column="165" selection-start-line="52" selection-start-column="165" selection-end-line="52" selection-end-column="165" />
             </state>
           </provider>
@@ -90,13 +72,13 @@
       <file leaf-file-name="camera.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game_Scripts/camera.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
+            <state relative-caret-position="1071">
               <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stages.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stages.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game_Scripts/stages.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
@@ -105,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stage_Manager.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stage_Manager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Game_Scripts/stage_Manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="94" column="62" selection-start-line="94" selection-start-column="62" selection-end-line="94" selection-end-column="62" />
+            <state relative-caret-position="1093">
+              <caret line="121" column="4" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -176,11 +158,11 @@
         <option value="$PROJECT_DIR$/Game_Scripts/tileMap.py" />
         <option value="$PROJECT_DIR$/Game_Scripts/skills/tank_skills.py" />
         <option value="$PROJECT_DIR$/Game_Scripts/basic_game_mechanics.py" />
-        <option value="$PROJECT_DIR$/init.py" />
-        <option value="$PROJECT_DIR$/Game_Scripts/stage_Manager.py" />
         <option value="$PROJECT_DIR$/Game_Scripts/renderer.py" />
         <option value="$PROJECT_DIR$/Game_Scripts/camera.py" />
         <option value="$PROJECT_DIR$/Game_Scripts/stages.py" />
+        <option value="$PROJECT_DIR$/init.py" />
+        <option value="$PROJECT_DIR$/Game_Scripts/stage_Manager.py" />
       </list>
     </option>
   </component>
@@ -331,21 +313,21 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
-      <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32943678" />
-      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.32943678" />
+      <window_info anchor="bottom" id="Python Console" order="0" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3995749" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="bottom" id="Message" order="4" />
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="5" weight="0.32943678" />
-      <window_info anchor="bottom" id="Python Console" order="0" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -476,50 +458,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Game_Scripts/combat_UI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="2040">
           <caret line="124" column="51" selection-start-line="124" selection-start-column="51" selection-end-line="124" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game_Scripts/stage_Manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="94" column="62" selection-start-line="94" selection-start-column="62" selection-end-line="94" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="37" selection-start-line="37" selection-end-line="37" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Game_Scripts/basic_game_mechanics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="1819">
           <caret line="107" column="18" selection-start-line="107" selection-start-column="18" selection-end-line="107" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Game_Scripts/renderer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
+        <state relative-caret-position="3655">
           <caret line="216" column="69" selection-start-line="216" selection-start-column="69" selection-end-line="216" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Game_Scripts/skills/tank_skills.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="884">
           <caret line="52" column="165" selection-start-line="52" selection-start-column="165" selection-end-line="52" selection-end-column="165" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Game_Scripts/camera.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
+        <state relative-caret-position="1071">
           <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="538" column="8" selection-start-line="538" selection-start-column="8" selection-end-line="538" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -527,6 +502,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="43" column="51" selection-start-line="43" selection-start-column="51" selection-end-line="43" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Game_Scripts/stage_Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1093">
+          <caret line="121" column="4" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
         </state>
       </provider>
     </entry>

@@ -209,7 +209,7 @@ ch["tank"] = sprites.character(
         name = "dummy 2",
         chrClass = "tank",
         team = '1',
-        maxHP = 150,
+        maxHP = 125,
         lvl= 10,
         weight=200,
         rate = 1,
@@ -237,7 +237,7 @@ ch["dummy"] = sprites.character(
         name = "dummy",
         chrClass = "tank",
         team = '2',
-        maxHP = 150,
+        maxHP = 125,
         lvl=10,
         weight=200,
         rate = 1,
@@ -536,6 +536,7 @@ while run:
 
         #Render Options
         renderer.flatRender(drawList, cam, borders, s, current_stage, background_screen, ch)
+        stage_manager.music_stage(current_stage, 0)
         #renderer.render3D(drawList, cam, s)
 
         # Draw UIs below renderer because renderer clears our screen
@@ -543,7 +544,7 @@ while run:
 
         #win conditions
         if win_conditions(['eliminate']) == True:
-            stage_manager.fade_out_bgm(current_stage)
+            stage_manager.music_stage(current_stage, 1)
             pass
             #game_fps=1
             #battle end animations before leaving
