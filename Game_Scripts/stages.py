@@ -28,11 +28,17 @@ stages = {
             "position" : (70,21),
             "scale" : (100,26),
         },
+        "on_floor": {
+            "visible" : False,
+            "img" : None,
+            "position" : None,
+            "scale" : None,
+        },
         "foreground": {
             "visible" : True,
-            "img" : 'Stage_Assets/foregrounds/bridge_under_2.png',
+            "img" : 'Stage_Assets/foregrounds/bridge_under_4.png',
             "position" : (70,2),
-            "scale" : (100,28),
+            "scale" : (100,30),
         },
         "bgm" : {
             "name" : "Final Encounter",
@@ -47,24 +53,29 @@ stages = {
             (36,8),
             (4,8),
         ],
+        "camera_spawn" : (20,-10,15)
     },
     "blank" : {
         "background": {
+            "visible" : False,
             "img" : None,
             "position" : None,
             "scale" : (1,0.6),
         },
         "middle_ground": {
+            "visible" : False,
             "img" : None,
             "position" : None,
             "scale" : None,
         },
         "stage_floor": {
+            "visible" : False,
             "img" : None,
             "position" : (700,125),
             "scale" : (1.5,1),
         },
         "foreground": {
+            "visible" : False,
             "img" : None,
             "position" : None,
             "scale" : None,
@@ -82,6 +93,7 @@ stages = {
             (36,8),
             (4,8),
         ],
+        "camera_spawn" : (20,-50,15)
     }
 }
 

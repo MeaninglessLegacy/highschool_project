@@ -122,7 +122,7 @@ def draw_ui_element(ui_element, screen):
         y_pos = math.floor(ui_element.y_position * screen_height)
         x_size = math.floor(ui_element.width * screen_width)
         y_size = math.floor(ui_element.height * screen_height)
-        img = functions.get_image(ui_element.image)
+        img = functions.get_image(ui_element.image, True)
         img = pygame.transform.scale(img, (x_size, y_size))
         #blit
         screen.blit(img, (x_pos, y_pos))

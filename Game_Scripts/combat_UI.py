@@ -15,9 +15,6 @@ ui_assets = Game_Scripts.ui_assets
 
 ############################################################################
 ############################################################################
-
-
-
 #Draw the health bar of the selected character
 def drawHealthBar(UI_surface, w, h, ch):
 
@@ -108,14 +105,14 @@ def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch, players):
         if not ui_portrait is None:
             #Return the asset in image
             key = ui_portrait["image"]
-            asset = functions.get_image(key)
+            asset = functions.get_image(key, True)
             asset = pygame.transform.scale(asset, (math.floor(char_guiX*w), math.floor(char_guiY*h)))
             gui_main.blit(asset, (0, 0))
 
         #now that the portrait is drawn if it is selected draw selected box
         if ui_chr.isSelected == True:
             ui_selected = ui_assets.returnAsset("universal")["portrait_select"]
-            asset = functions.get_image(ui_selected["image"])
+            asset = functions.get_image(ui_selected["image"], True)
             asset = pygame.transform.scale(asset, (math.floor(char_guiX * w), math.floor(char_guiY * h)))
             ply = controls.find_player(players, player_characters[chr])
             if ply != None:
@@ -163,11 +160,123 @@ def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch, players):
         gui_main.blit(stat_displays, (stat_displaysX_pos, stat_displaysY_pos))
         gui_main.convert()
         UI_surface.blit(gui_main, (char_guiX_pos, char_guiY_pos))
+        UI_surface.convert()
 
     #blit entire gui onto screen
     primaryScreen.blit(UI_surface, (0, 0))
+    primaryScreen.convert()
+
+############################################################################
+############################################################################
+
+start_trigger = False
+duration_frames = 0
+trigger_frames = 0
+
+############################################################################
+############################################################################
+
+def battle_Start_Animation(primaryScreen, UI_surface, text):
+
+    global start_trigger, trigger_frames, duration_frames
+
+    battle_text = text
+
+    if trigger_frames > 0:
+        trigger_frames -= 1
+
+        #screen_size
+        s_x = UI_surface.get_width()
+        s_y = math.floor(UI_surface.get_height()/2)
+        #the primary layer that the thing is drawn on
+        main_display = pygame.Surface((s_x, s_y), pygame.SRCALPHA)
+        interval = (duration_frames/4)
+        #intervals
+        i1 = interval
+        i2 = interval/2+i1
+        i3 = interval+i1+i2
+        i4 = interval*5/8+i1+i2+i3
+        #used interval for timeframes
+        I1 = duration_frames-i1
+        I2 = duration_frames-i2
+        I3= duration_frames-i3
+        I4 = duration_frames-i4
+        #animation
+        if trigger_frames >= I1:
+            #sides come in
+            t = (duration_frames-trigger_frames)/i1
+            left_rect_x = math.floor(-s_x + t*s_x)
+            right_rect_x = math.floor(s_x - t*s_x)
+            left_rect = pygame.Rect((left_rect_x, 0, s_x, s_y))
+            right_rect = pygame.Rect((right_rect_x, 0, s_x, s_y))
+            pygame.draw.rect(main_display, (0,0,0,150), left_rect, 0)
+            pygame.draw.rect(main_display, (0,0,0, 150), right_rect, 0)
+        if I1 > trigger_frames >= I2:
+            #the rect
+            rect = pygame.Rect((0, 0, s_x, s_y))
+            pygame.draw.rect(main_display, (0, 0, 0, 150), rect, 0)
+            #the text
+            #interval 1-4 thus 3 intervals
+            tinterval = (I1-I2)/len(battle_text)
+            #how many multiples of trigger_frames lies in tinterval, how many intervals have passed
+            m_interval = math.ceil((trigger_frames-I2)/tinterval)
+            #letter to spell
+            letters = len(battle_text)-m_interval
+            list_of_output = []
+            for i in range(0,letters):
+                list_of_output.append(battle_text[i])
+            output_string = "".join(list_of_output)
+
+            f = font.Font(None, math.ceil(s_y * 0.25))
+            name_text = f.render(output_string, True, [255, 255, 255])
+            name_text_rect = name_text.get_rect(
+            center=(math.ceil(s_x * 0.5), math.ceil(s_y * 0.5)))
+            main_display.blit(name_text, name_text_rect)
+        if I2 > trigger_frames >= I3:
+            # the rect
+            rect = pygame.Rect((0, 0, s_x, s_y))
+            pygame.draw.rect(main_display, (0, 0, 0, 150), rect, 0)
+            #the front
+            f = font.Font(None, math.ceil(s_y * 0.25))
+            name_text = f.render(battle_text, True, [255, 255, 255])
+            name_text_rect = name_text.get_rect(
+                center=(math.ceil(s_x * 0.5), math.ceil(s_y * 0.5)))
+            main_display.blit(name_text, name_text_rect)
+        if I2 > trigger_frames >= I3:
+            int = (I2-I3)/4
+            m = math.ceil((I2-trigger_frames)/int)
+            if (m % 2) == 0:
+                battle_text = ''.join(['>', battle_text, '<'])
+            rect = pygame.Rect((0, 0, s_x, s_y))
+            pygame.draw.rect(main_display, (0, 0, 0, 150), rect, 0)
+            #the front
+            f = font.Font(None, math.ceil(s_y * 0.25))
+            name_text = f.render(battle_text, True, [255, 255, 255])
+            name_text_rect = name_text.get_rect(
+                center=(math.ceil(s_x * 0.5), math.ceil(s_y * 0.5)))
+            main_display.blit(name_text, name_text_rect)
+        if I3 > trigger_frames >= I4:
+            # sides leave in
+            t = (I3 - trigger_frames) / (i4-i3-i2-i1)
+            left_rect_x = math.floor(0 + t * s_x)
+            right_rect_x = math.floor(0 - t * s_x)
+            left_rect = pygame.Rect((left_rect_x, 0, s_x, s_y))
+            right_rect = pygame.Rect((right_rect_x, 0, s_x, s_y))
+            pygame.draw.rect(main_display, (0, 0, 0, 150), left_rect, 0)
+            pygame.draw.rect(main_display, (0, 0, 0, 150), right_rect, 0)
+        #blit
+        main_display.convert()
+        primaryScreen.blit(main_display, (0,s_y/2))
+    elif trigger_frames <= 0:
+        start_trigger = False
 
 
+#Battle start
+def battle_Start_Trigger(duration):
+    global start_trigger, trigger_frames, duration_frames
+    duration_frames = duration
+    trigger_frames = duration
+    start_trigger = True
 
 ############################################################################
 ############################################################################
@@ -175,7 +284,9 @@ def drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch, players):
 blankSurface = None
 
 #Main function
-def draw_combat_UI(primaryScreen, UI_surface, w, h, ch, players):
+def draw_combat_UI(primaryScreen, UI_surface, w, h, ch, players, teams):
+
+    global start_trigger
 
     #Blank Surface/Redraw the UI
     if globals()['blankSurface'] is None:
@@ -185,7 +296,6 @@ def draw_combat_UI(primaryScreen, UI_surface, w, h, ch, players):
     #draw Ui
     drawCharacterBoxs(primaryScreen, UI_surface, w, h, ch, players)
 
-    pass
 
 
 

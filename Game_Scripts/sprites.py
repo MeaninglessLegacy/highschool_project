@@ -48,7 +48,7 @@ class sprite(pygame.sprite.Sprite):
     def changeImage(self, imgUrl):
         self.imgUrl = imgUrl
 
-        self.img = functions.get_image(self.imgUrl)
+        self.img = functions.get_image(self.imgUrl, True)
         self.img = pygame.transform.scale(self.img, (self.w, self.h))
 
     def resetWH(self, w, h):

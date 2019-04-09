@@ -156,7 +156,7 @@ players = {
 
 #render type 3d cam can also be used for 2.5D
 #cam = renderer.camera2D(550, 100, 0)
-cam=renderer.camera3D(15, 8, 15, 0, 0)
+cam=renderer.camera3D(20, -20, 15, 0, 0)
 
 #animate objects
 objects_to_animate = []
@@ -166,7 +166,7 @@ objects_to_manage = []
 
 #Map-Temporary
 #tile_set = tileMapper.tileSet3D(15, 1, 10, 0, 0, -15, 0.5)
-tile_set = tileMapper.tileSet2D(20,8,0,0,-15,2)
+tile_set = tileMapper.tileSet2D(20,10,0,0,-15,2)
 borders = tileMapper.borders2D(tile_set)
 
 #Stage
@@ -242,7 +242,7 @@ ch["dummy"] = sprites.character(
         weight=200,
         rate = 1,
         walkspeed = 1,
-        atk = 12,
+        atk = 200,
     ),
     isSelected=False,
     playerCharacter = True,
@@ -452,9 +452,13 @@ while run:
             #clear old slates
             objects_to_manage = []
             objects_to_animate = []
+            #center camera
+            cam.x = current_stage['camera_spawn'][0]
+            cam.y = current_stage['camera_spawn'][1]
+            cam.z = current_stage['camera_spawn'][2]
             #loading the characters
             for chr in ch:
-                load_thread = functions.loadThread(1, "Load-Thread", animations.animations[ch[chr].stats.chrClass])
+                load_thread = functions.loadThread(1, "Load-Thread", animations.animations[ch[chr].stats.chrClass], current_stage)
                 load_thread.start()
                 #check to see if our threads have loaded
                 while load_thread.loaded == False:
@@ -484,9 +488,8 @@ while run:
                     for chr in teams[team]:
                         ch[chr].spriteObject.x = slots_assigned[team][0]
                         ch[chr].spriteObject.y = slots_assigned[team][1]
-            #transition into combat
-
-
+            # transition into combat
+            combat_UI_manager.battle_Start_Trigger(game_fps/2)
 
         if win_conditions(['eliminate']) == False:
 
@@ -541,16 +544,34 @@ while run:
         renderer.flatRender(drawList, cam, borders, s, current_stage, background_screen, ch)
         #renderer.render3D(drawList, cam, s)
 
+
+        #######OVERLAY UIS
+
         # Draw UIs below renderer because renderer clears our screen
-        combat_UI_manager.draw_combat_UI(s, combat_UI, w, h, ch, players)
+        combat_UI_manager.draw_combat_UI(s, combat_UI, w, h, ch, players, teams)
+
+        # start combat
+        if combat_UI_manager.start_trigger == True:
+            combat_UI_manager.battle_Start_Animation(s, generic_screen, "BATTLE START")
+            for chr in ch:
+                ch[chr].stats.canMove = False
+
+
+        ###########WIN CONDITIONS
 
         #win conditions
         if win_conditions(['eliminate']) == True:
-            stage_manager.music_stage(current_stage, 1)
-            pass
-            #game_fps=1
+            finish = stage_manager.music_stage(current_stage, 1)
             #battle end animations before leaving
-            #changeScreen('title')
+            if finish == False:
+                # idk why, the game is prone to crashing if you don't give players control I think it has something to do with how held abilties work
+                for player in players:
+                    if players[player]['control_type'] == 'keyboard':
+                        controls.keyPress2D(ch, borders, cam, players, player)
+                    elif players[player]['control_type'] == 'controller':
+                        controls.controllerPress2D(ch, borders, cam, players, player)
+            elif finish == True:
+                changeScreen('title')
 
     if screen =='load':
         if previous_screen != "load":

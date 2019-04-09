@@ -16,16 +16,18 @@ borders = []
 ############################################################################
 
 class loadThread(threading.Thread):
-    def __init__(self, threadID, name, load):
+    def __init__(self, threadID, name, load, stage):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
         self.load = load
+        self.stage = stage
         self.loaded = False
     def run(self):
         start_time = time.time()
         print("Starting " + self.name + " " + str(time.ctime(start_time)))
         preloadAnimationSet(self.load)
+        preloadStage(self.stage)
         self.loaded = True
         print("Exiting " + self.name + " " + str(time.ctime(time.time())) + " Time taken " + str(time.time()-start_time))
 
@@ -42,7 +44,7 @@ def copyArray(input):
     return returnArray
 
 #Checking if image is loaded and loading images that need to be loaded
-def get_image(key):
+def get_image(key, save_alpha):
     #if loaded image is not in the cache then load the image once
     if not key in image_cache:
         # This makes sure even if we can't find the file it does not crash the engine.
@@ -53,11 +55,10 @@ def get_image(key):
             pass
         else:
             #change back to .convert_alpha() later
-            '''if " Stage_Assets" in key:
-                image_cache[key] = pygame.image.load(key).convert()
+            if save_alpha == True:
+                image_cache[key] = pygame.image.load(key).convert_alpha()
             else:
-                image_cache[key] = pygame.image.load(key).convert_alpha()'''
-            image_cache[key] = pygame.image.load(key).convert_alpha()
+                image_cache[key] = pygame.image.load(key).convert()
     #return the image in cache
     return image_cache[key]
 
@@ -177,7 +178,7 @@ def preload(animations):
                     print('missing sprite' + animations[i]["frames"][o])
                     pass
                 else:
-                    image_cache[animations[i]["frames"][o]] = pygame.image.load(animations[i]["frames"][o])
+                    image_cache[animations[i]["frames"][o]] = pygame.image.load(animations[i]["frames"][o]).convert_alpha()
                     #print(str("loaded "+animations[i]["frames"][o]))
                     if animations[i]['sounds'] != {}:
                         for sound in animations[i]['sounds']:
@@ -195,12 +196,41 @@ def preloadAnimationSet(animation_set):
                     print('missing sprite' + animation_set[key]["frames"][o])
                     pass
                 else:
-                    image_cache[animation_set[key]["frames"][o]] = pygame.image.load(animation_set[key]["frames"][o])
+                    image_cache[animation_set[key]["frames"][o]] = pygame.image.load(animation_set[key]["frames"][o]).convert_alpha()
                     #print(str("loaded " + animation_set[key]["frames"][o]))
                     if animation_set[key]['sounds'] != {}:
                         for sound in animation_set[key]['sounds']:
                             get_sound(animation_set[key]['sounds'][sound]['source'])
                             #print(str("loaded" + animation_set[key]['sounds'][sound]['source']))
+
+def try_file(file):
+    try:
+        fh = open(file, 'r')
+    except FileNotFoundError:
+        print('missing file' + file)
+        return False
+    else:
+        return True
+
+def preloadStage(stage):
+    if stage['background']['img'] != None:
+        if try_file(stage['background']['img']) == True:
+            get_image(stage['background']['img'], False)
+    if stage['middle_ground']['img'] != None:
+        if try_file(stage['middle_ground']['img']) == True:
+            get_image(stage['middle_ground']['img'], False)
+    if stage['stage_floor']['img'] != None:
+        if try_file(stage['stage_floor']['img']) == True:
+            get_image(stage['stage_floor']['img'], True)
+    if stage['on_floor']['img'] != None:
+        if try_file(stage['on_floor']['img']) == True:
+            get_image(stage['on_floor']['img'], True)
+    if stage['foreground']['img'] != None:
+        if try_file(stage['foreground']['img']) == True:
+            get_image(stage['foreground']['img'], True)
+    if stage['bgm']['source'] != None:
+        if try_file(stage['bgm']['source']) == True:
+            pygame.mixer.music.load(stage['bgm']['source'])
 
 
 ############################################################################

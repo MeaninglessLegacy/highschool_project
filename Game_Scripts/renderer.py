@@ -46,7 +46,7 @@ def drawSprite2D(spr, cam, s):
     z = spr.z
 
     # we need to reset the image because pygame.transform.scale is destructive and will no revert changes made
-    spr.img = functions.get_image(spr.imgUrl)
+    spr.img = functions.get_image(spr.imgUrl, True)
 
     spr.img = pygame.transform.scale(spr.img, (spr.w, spr.h))
 
@@ -196,6 +196,7 @@ def flatRender(renderList, cam, borders, s, stage, background_screen, ch):
     #drawbackground first
     background_render_ticks = 24
     background = stage_manager.renderStage2D(stage, background_screen, cam,2)
+    background.convert()
     s.blit(background, (0,0))
 
     drawBorders2_5D(borders, cam, s)
@@ -215,6 +216,7 @@ def flatRender(renderList, cam, borders, s, stage, background_screen, ch):
     foreground_screen = pygame.Surface((background_screen.get_width(), background_screen.get_height()), pygame.SRCALPHA)
     #foreground
     foreground = stage_manager.renderStage2D(stage, foreground_screen, cam, 1)
+    foreground_screen.convert()
     s.blit(foreground, (0,0))
 
 
@@ -241,7 +243,7 @@ def drawSprite3D(spr, cam, s):
     spr.spriteBox.updateSpriteBox(spr, cam, s)
 
     #we need to reset the image because pygame.transform.scale is destructive and will no revert changes made
-    spr.img = functions.get_image(spr.imgUrl)
+    spr.img = functions.get_image(spr.imgUrl, True)
 
     #now we scale the image again
     spr.img = pygame.transform.scale(spr.img, (spr.spriteBox.rect.width, spr.spriteBox.rect.height))

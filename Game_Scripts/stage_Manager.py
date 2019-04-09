@@ -23,7 +23,7 @@ music_inc = 0
 
 def drawBackground(background_img, screen, cam):
     # Load the image
-    img = functions.get_image(background_img['img'])
+    img = functions.get_image(background_img['img'], False)
     img_pos = background_img['position']
     img = pygame.transform.scale(img, (math.floor(screen.get_width() * background_img['scale'][0]),math.floor(screen.get_height() * background_img['scale'][1])))
     # If a position is specified otherwise it is fixed
@@ -73,9 +73,11 @@ def determine_regions(layer, cam, s):
 
     if image != None:
 
-        image = functions.get_image(layer['img'])
+        image = functions.get_image(layer['img'], True)
 
-        image = pygame.transform.scale(image, (space.width, space.height))
+        if space.width < 5000 or space.height < 5000:
+
+            image = pygame.transform.scale(image, (space.width, space.height))
 
         s.blit(image, space)
 
@@ -88,10 +90,13 @@ def renderStage2D(stage, screen, cam, layer):
         drawBackground(stage['background'], background_screen, cam)
     #Mid ground
     if stage['middle_ground']['visible'] != False and layer == 2:
-        drawBackground(stage['middle_ground'], background_screen, cam)
-    #Floor
+        determine_regions(stage['middle_ground'], cam, screen)
+    #Floor- stage floor is special boit it is behind yet still needs alpha
     if stage['stage_floor']['visible'] != False and layer == 2:
         determine_regions(stage['stage_floor'], cam, screen)
+    #On Floor
+    if stage['on_floor']['visible'] != False and layer == 1:
+        determine_regions(stage['on_floor'], cam, screen)
     #Foreground
     if stage['foreground']['visible'] != False and layer == 1:
         determine_regions(stage['foreground'], cam, screen)
@@ -120,11 +125,16 @@ def music_stage(stage, level):
             pygame.mixer.music.set_volume(stage['bgm']['volume']*(music_inc/stage['bgm']['fade_in_time']))
 			
     if stage['bgm']['source'] != None and level == 1:
-        if music_inc > 1:
-            music_inc -= 3
+        if music_inc > 0:
+            music_inc -= 1
             pygame.mixer.music.set_volume(stage['bgm']['volume'] * (music_inc / stage['bgm']['fade_in_time']))
         if music_inc <= 0:
-            pygame.mixer.music.stop()
+            if stage_bgm != None:
+                stage_bgm = None
+                pygame.mixer.music.stop()
+            return True
+
+    return False
 
 
 def set_bgm(bgm):
